@@ -19,6 +19,7 @@ int8_t RTC_Init(I2C_HandleTypeDef hi)						// The function of initialization RTC
 #endif
 #ifdef	RTC_DS1307
 #endif
+	return 0;
 } // RTC_Init
 
 int8_t RTC_Write(I2C_HandleTypeDef hi, uint8_t address, uint8_t data)		// The function of writing data to RTC
@@ -42,7 +43,7 @@ int8_t RTC_Read(I2C_HandleTypeDef hi, uint8_t address, uint8_t *data)		// The fu
 	}
 	else
 	{
-		if(HAL_I2C_Master_Receive(&hi,(DS1307_ADDR), data, 1, 100) != HAL_OK)
+		if(HAL_I2C_Master_Receive(&hi,(RTC_ADDR), data, 1, 100) != HAL_OK)
 			return -1;
 	}
 	return 0;
