@@ -1,5 +1,5 @@
-#ifndef DS1307_H
-#define DS1307_H
+#ifndef _DS1307_H
+#define _DS1307_H
 
 #include "stm32f1xx_hal.h"
 
