@@ -1,5 +1,5 @@
-#ifndef _DS1307_H
-#define _DS1307_H
+#ifndef _RTC_H
+#define _RTC_H
 
 // #define	RTC_DS1307						// Uncomment this line for DS3107
 #define		RTC_DS3231						// Comment this line for DS3107
