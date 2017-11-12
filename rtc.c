@@ -3,7 +3,7 @@
 
 #include "stm32f1xx_hal.h"
 
-#include "ds1307.h"
+#include "rtc.h"
 
 int8_t DS1307Write(I2C_HandleTypeDef hi, uint8_t address, uint8_t data)
 {
