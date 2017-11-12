@@ -7,17 +7,31 @@
 
 int8_t RTC_Init(I2C_HandleTypeDef hi)						// The function of initialization RTC
 {
-	// Clock start
 	uint8_t temp;
+	
 #ifdef	RTC_DS3231	
-	RTC_Read(hi,0x0E,&temp);
+	// Clock start	
+	if(RTC_Read(hi,0x0E,&temp)) return -1;
 	temp &= ~(1 << 7);
-	RTC_Write(hi,0x0E,temp);
-	RTC_Read(hi,0x0E,&temp);
-	temp &= ~((1 << 4) | (1 << 3) | ( 1 << 2));				// Enable 1 Hz signal on SQW output
-	RTC_Write(hi,0x0E,temp);
+	if(RTC_Write(hi,0x0E,temp)) return -1;
+	
+	// Enable 1 Hz signal on SQW output
+	if(RTC_Read(hi,0x0E,&temp)) return -1;
+	temp &= ~((1 << 4) | (1 << 3) | ( 1 << 2));				
+	if(RTC_Write(hi,0x0E,temp)) return -1;
 #endif
+	
 #ifdef	RTC_DS1307
+	// Clock start	
+	if(RTC_Read(0x00,&temp)) return -1;
+	temp &= ~(1 << 7);
+	if(RTC_Write(0x00,temp)) return -1;
+	
+	// Enable 1 Hz signal on SQW output	
+	if(RTC_Read(0x07,&temp)) return -1;
+	temp &= ~((1 << 1) | (1 << 0));
+	temp |= (1<<4);
+	if(RTC_Write(0x07,temp)) return -1;
 #endif
 	return 0;
 } // RTC_Init
